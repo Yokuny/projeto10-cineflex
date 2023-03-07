@@ -1,5 +1,7 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import data from "./data/data.js";
 
 import HomePage from "./pages/HomePage/HomePage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
@@ -29,10 +31,10 @@ export default function App() {
     <>
       <NavContainer>CINEFLEX</NavContainer>
 
-      {/* <HomePage /> */}
-      {/* <SeatsPage /> */}
+      <HomePage />
+      <SeatsPage />
       <SessionsPage />
-      {/* <SuccessPage /> */}
+      <SuccessPage />
     </>
   );
 }
