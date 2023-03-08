@@ -1,8 +1,7 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
 import data from "./data/data.js";
-
 import HomePage from "./pages/HomePage/HomePage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import SessionsPage from "./pages/SessionsPage/SessionsPage";
@@ -26,15 +25,22 @@ const NavContainer = styled.div`
   }
 `;
 
-export default function App() {
+function App() {
+  const [moviesData, setMoviesData] = useState([]);
+  const getMoviesData = () => {
+    data.getMovies().then((moviesData) => {
+      setMoviesData(moviesData);
+    });
+  };
   return (
     <>
       <NavContainer>CINEFLEX</NavContainer>
 
-      <HomePage />
+      <HomePage requireMovies={getMoviesData} movies={moviesData} />
       <SeatsPage />
       <SessionsPage />
       <SuccessPage />
     </>
   );
 }
+export default App;
