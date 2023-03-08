@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  PageContainer,
-  SessionContainer,
-  ButtonsContainer,
-  FooterContainer,
-} from "../../components/SessionsStyle";
+import { PageContainer, SessionContainer, ButtonsContainer, FooterContainer } from "./SessionsStyle";
 import data from "../../data/data.js";
 
 function SessionsPage({ movie, setHour }) {
