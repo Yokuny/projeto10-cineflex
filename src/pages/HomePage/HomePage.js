@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { PageContainer, ListContainer, MovieContainer } from "../../components/HomeStyle";
-export default function HomePage({ requireMovies, catalog, setMovie }) {
+import { PageContainer, ListContainer, MovieContainer } from "./HomeStyle";
+function HomePage({ requireMovies, catalog, setMovie }) {
   useEffect(() => requireMovies(), []);
   const navigate = useNavigate();
   const selectMovie = (id) => {
@@ -26,3 +26,4 @@ export default function HomePage({ requireMovies, catalog, setMovie }) {
     </PageContainer>
   );
 }
+export default HomePage;
