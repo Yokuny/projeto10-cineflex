@@ -1,32 +1,16 @@
 import { useState } from "react";
-import styled from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import data from "./data/data.js";
+
 import HomePage from "./pages/HomePage/HomePage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import SessionsPage from "./pages/SessionsPage/SessionsPage";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
-import RouteSwitch from "./RouteSwitch.js";
-
-const NavContainer = styled.div`
-  width: 100%;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #c3cfd9;
-  color: #e8833a;
-  font-family: "Roboto", sans-serif;
-  font-size: 34px;
-  position: fixed;
-  top: 0;
-  a {
-    text-decoration: none;
-    color: #e8833a;
-  }
-`;
+import { NavContainer } from "./components/NavContainer";
 
 function App() {
   const [moviesData, setMoviesData] = useState([]);
+  const [selected, setSelected] = useState(null);
   const getMoviesData = () => {
     data.getMovies().then((moviesData) => {
       setMoviesData(moviesData);
@@ -34,12 +18,18 @@ function App() {
   };
   return (
     <>
-      <NavContainer>CINEFLEX</NavContainer>
-      <RouteSwitch />
-      <HomePage requireMovies={getMoviesData} movies={moviesData} />
-      <SeatsPage />
-      <SessionsPage />
-      <SuccessPage />
+      <BrowserRouter>
+        <NavContainer>CINEFLEX</NavContainer>
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage requireMovies={getMoviesData} movies={moviesData} selection={setSelected} />}
+          />
+          <Route path="/sessoes/:selected" element={<SessionsPage selection={selected} />} />
+          <Route path="/assentos" element={<SeatsPage />} />
+          <Route path="/sucesso" element={<SuccessPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
