@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
 import data from "./data/data.js";
 import HomePage from "./pages/HomePage/HomePage";
 import SeatsPage from "./pages/SeatsPage/SeatsPage";
 import SessionsPage from "./pages/SessionsPage/SessionsPage";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
+import RouteSwitch from "./RouteSwitch.js";
 
 const NavContainer = styled.div`
   width: 100%;
@@ -35,7 +35,7 @@ function App() {
   return (
     <>
       <NavContainer>CINEFLEX</NavContainer>
-
+      <RouteSwitch />
       <HomePage requireMovies={getMoviesData} movies={moviesData} />
       <SeatsPage />
       <SessionsPage />
