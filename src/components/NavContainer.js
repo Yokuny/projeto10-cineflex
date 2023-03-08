@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const NavContainer = styled.div`
+const NavContainer = styled.div`
   width: 100%;
   height: 70px;
   display: flex;
@@ -16,3 +16,4 @@ export const NavContainer = styled.div`
     color: #e8833a;
   }
 `;
+export default NavContainer;
