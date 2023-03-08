@@ -27,8 +27,8 @@ function App() {
             path="/"
             element={<HomePage requireMovies={getMoviesData} catalog={moviesData} setMovie={setMovie} />}
           />
-          <Route path="/sessoes/:movie" element={<SessionsPage movie={movie} setHour={setHour} />} />
-          <Route path="/assentos/:hour" element={<SeatsPage hour={hour} />} />
+          <Route path="/sessoes/:movie" element={<SessionsPage id={movie} setHour={setHour} />} />
+          <Route path="/assentos/:hour" element={<SeatsPage id={hour} />} />
           <Route path="/sucesso" element={<SuccessPage />} />
         </Routes>
       </BrowserRouter>
