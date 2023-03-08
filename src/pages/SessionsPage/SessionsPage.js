@@ -1,47 +1,49 @@
+import { useState, useEffect } from "react";
 import {
   PageContainer,
   SessionContainer,
   ButtonsContainer,
   FooterContainer,
 } from "../../components/SessionsStyle";
+import data from "../../data/data.js";
 
-function SessionsPage({ selection }) {
-  console.log("selection");
-  console.log(selection);
+function SessionsPage({ movie }) {
+  const [title, setTitle] = useState([]);
+  console.log("sessions");
+  console.log(title);
+  useEffect(() => {
+    data.getSession(movie).then((data) => {
+      setTitle(data);
+    });
+  }, []);
+  if (title.length === 0) return <div>Carregando...</div>;
   return (
     <PageContainer>
       Selecione o horário
       <div>
-        <SessionContainer>
-          Sexta - 03/03/2023
-          <ButtonsContainer>
-            <button>14:00</button>
-            <button>15:00</button>
-          </ButtonsContainer>
-        </SessionContainer>
-
-        <SessionContainer>
-          Sexta - 03/03/2023
-          <ButtonsContainer>
-            <button>14:00</button>
-            <button>15:00</button>
-          </ButtonsContainer>
-        </SessionContainer>
-
-        <SessionContainer>
-          Sexta - 03/03/2023
-          <ButtonsContainer>
-            <button>14:00</button>
-            <button>15:00</button>
-          </ButtonsContainer>
-        </SessionContainer>
+        {title.days.map((about) => {
+          return (
+            <SessionContainer key={about.id}>
+              {about.weekday} - {about.date}
+              <ButtonsContainer>
+                {about.showtimes.map((hour) => {
+                  return (
+                    <button id={hour.id} key={`${hour.name} - ${hour.id}`}>
+                      {hour.name}
+                    </button>
+                  );
+                })}
+              </ButtonsContainer>
+            </SessionContainer>
+          );
+        })}
       </div>
       <FooterContainer>
         <div>
-          <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster" />
+          <img src={title.posterURL} alt="poster" />
         </div>
         <div>
-          <p>Tudo em todo lugar ao mesmo tempo</p>
+          <p>{title.title}</p>
         </div>
       </FooterContainer>
     </PageContainer>

@@ -26,7 +26,7 @@ function App() {
             path="/"
             element={<HomePage requireMovies={getMoviesData} movies={moviesData} selection={setSelected} />}
           />
-          <Route path="/sessoes/:selected" element={<SessionsPage selection={selected} />} />
+          <Route path="/sessoes/:selected" element={<SessionsPage movie={selected} />} />
           <Route path="/assentos" element={<SeatsPage />} />
           <Route path="/sucesso" element={<SuccessPage />} />
         </Routes>
