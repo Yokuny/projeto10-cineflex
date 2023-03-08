@@ -11,7 +11,8 @@ import data from "./data/data.js";
 
 function App() {
   const [moviesData, setMoviesData] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [movie, setMovie] = useState(null);
+  const [hour, setHour] = useState(null);
   const getMoviesData = () => {
     data.getMovies().then((moviesData) => {
       setMoviesData(moviesData);
@@ -24,10 +25,10 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<HomePage requireMovies={getMoviesData} movies={moviesData} selection={setSelected} />}
+            element={<HomePage requireMovies={getMoviesData} catalog={moviesData} setMovie={setMovie} />}
           />
-          <Route path="/sessoes/:selected" element={<SessionsPage movie={selected} />} />
-          <Route path="/assentos" element={<SeatsPage />} />
+          <Route path="/sessoes/:movie" element={<SessionsPage movie={movie} setHour={setHour} />} />
+          <Route path="/assentos/:hour" element={<SeatsPage hour={hour} />} />
           <Route path="/sucesso" element={<SuccessPage />} />
         </Routes>
       </BrowserRouter>
