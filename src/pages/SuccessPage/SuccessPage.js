@@ -1,4 +1,4 @@
-import { PageContainer, TextContainer } from "./SuccessPageStyles";
+import { PageContainer, TextContainer } from "./SuccessStyle";
 function SuccessPage() {
   return (
     <PageContainer>

@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { PageContainer, SessionContainer, ButtonsContainer, FooterContainer } from "./SessionsStyle";
 import data from "../../data/data.js";
 
-function SessionsPage({ movie, setHour }) {
+function SessionsPage({ id, setHour }) {
   const [title, setTitle] = useState([]);
   const navigate = useNavigate();
-  const selectSeat = (id) => {
-    navigate(`/assentos/${id}`);
+  const selectSeat = (seat) => {
+    navigate(`/assentos/${seat}`);
   };
   useEffect(() => {
-    data.getSession(movie).then((data) => {
+    data.getSession(id).then((data) => {
       setTitle(data);
     });
   }, []);
