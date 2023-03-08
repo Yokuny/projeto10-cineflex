@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   PageContainer,
   SessionContainer,
@@ -7,10 +8,12 @@ import {
 } from "../../components/SessionsStyle";
 import data from "../../data/data.js";
 
-function SessionsPage({ movie }) {
+function SessionsPage({ movie, setHour }) {
   const [title, setTitle] = useState([]);
-  console.log("sessions");
-  console.log(title);
+  const navigate = useNavigate();
+  const selectSeat = (id) => {
+    navigate(`/assentos/${id}`);
+  };
   useEffect(() => {
     data.getSession(movie).then((data) => {
       setTitle(data);
@@ -28,7 +31,13 @@ function SessionsPage({ movie }) {
               <ButtonsContainer>
                 {about.showtimes.map((hour) => {
                   return (
-                    <button id={hour.id} key={`${hour.name} - ${hour.id}`}>
+                    <button
+                      id={hour.id}
+                      key={`${hour.name} - ${hour.id}`}
+                      onClick={() => {
+                        setHour(hour.id);
+                        selectSeat(hour.id);
+                      }}>
                       {hour.name}
                     </button>
                   );

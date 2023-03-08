@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageContainer, ListContainer, MovieContainer } from "../../components/HomeStyle";
-export default function HomePage({ requireMovies, movies, selection }) {
+export default function HomePage({ requireMovies, catalog, setMovie }) {
   useEffect(() => requireMovies(), []);
   const navigate = useNavigate();
   const selectMovie = (id) => {
@@ -11,15 +11,15 @@ export default function HomePage({ requireMovies, movies, selection }) {
     <PageContainer>
       Selecione o filme
       <ListContainer>
-        {movies.map((movie) => (
+        {catalog.map((movieData) => (
           <MovieContainer
-            id={movie.id}
-            key={movie.id}
+            id={movieData.id}
+            key={movieData.id}
             onClick={() => {
-              selection(movie.id);
-              selectMovie(movie.id);
+              setMovie(movieData.id);
+              selectMovie(movieData.id);
             }}>
-            <img src={movie.posterURL} alt="poster" />
+            <img src={movieData.posterURL} alt="poster" />
           </MovieContainer>
         ))}
       </ListContainer>
