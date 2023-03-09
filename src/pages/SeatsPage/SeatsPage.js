@@ -16,20 +16,28 @@ const mark = [
   { color: "#FBE192", border: "#F7C52B" },
   { color: "#1AAE9E", border: "#0E7D71" },
 ];
+
+
 function SeatsPage({ id }) {
+  const [allSeats, setAllSeats] = useState([]);
   const [seats, setSeats] = useState([]);
   useEffect(() => {
     data.getSeats(id).then((data) => {
-      setSeats(data);
+      setAllSeats(data);
+      setSeats(
+        data.seats.map(({ id, name, isAvailable }) => {
+          return { id, name, isAvailable, selected: false };
+        })
+      );
     });
   }, []);
-  if (seats.length === 0) return <div>Carregando...</div>;
+  if (allSeats.length === 0) return <div>Carregando...</div>;
   return (
     <PageContainer>
       Selecione o(s) assento(s)
       <SeatsContainer>
-        {seats.seats.map((seat) => {
-          console.log(seat);
+        {console.log(seats)}
+        {seats.map((seat) => {
           return (
             <SeatItem
               key={seat.id}
@@ -60,16 +68,16 @@ function SeatsPage({ id }) {
         <input placeholder="Digite seu nome..." />
         CPF do Comprador:
         <input placeholder="Digite seu CPF..." />
-        <button id={seats.id}>Reservar Assento(s)</button>
+        <button id={allSeats.id}>Reservar Assento(s)</button>
       </FormContainer>
       <FooterContainer>
         <div>
-          <img src={seats.movie.posterURL} alt="poster" />
+          <img src={allSeats.movie.posterURL} alt="poster" />
         </div>
         <div>
-          <p>{seats.movie.title}</p>
+          <p>{allSeats.movie.title}</p>
           <p>
-            {seats.day.weekday} - {seats.name}
+            {allSeats.day.weekday} - {allSeats.name}
           </p>
         </div>
       </FooterContainer>
