@@ -20,45 +20,6 @@ export const SeatsContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
 `;
-export const FormContainer = styled.div`
-  width: calc(100vw - 40px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 20px 0;
-  font-size: 18px;
-  button {
-    align-self: center;
-    cursor: pointer;
-  }
-  input {
-    width: calc(100vw - 60px);
-  }
-`;
-export const CaptionContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 300px;
-  justify-content: space-between;
-  margin: 20px;
-`;
-export const CaptionCircle = styled.div`
-  border: 1px solid ${({ border }) => border};
-  background-color: ${({ color }) => color};
-  height: 25px;
-  width: 25px;
-  border-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 5px 3px;
-`;
-export const CaptionItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-`;
 export const SeatItem = styled.button`
   height: 25px;
   width: 25px;
@@ -80,9 +41,26 @@ export const SeatItem = styled.button`
   cursor: pointer;
   :disabled {
     background-color: #fbe192;
+    border: 1px solid #f7c52b;
     cursor: not-allowed;
   }
 `;
+export const FormContainer = styled.div`
+  width: calc(100vw - 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px 0;
+  font-size: 18px;
+  button {
+    align-self: center;
+    cursor: pointer;
+  }
+  input {
+    width: calc(100vw - 60px);
+  }
+`;
+
 export const FooterContainer = styled.div`
   width: 100%;
   height: 120px;
@@ -93,7 +71,6 @@ export const FooterContainer = styled.div`
   font-size: 20px;
   position: fixed;
   bottom: 0;
-
   div:nth-child(1) {
     box-shadow: 0px 2px 4px 2px #0000001a;
     border-radius: 3px;
@@ -108,7 +85,6 @@ export const FooterContainer = styled.div`
       padding: 8px;
     }
   }
-
   div:nth-child(2) {
     display: flex;
     flex-direction: column;

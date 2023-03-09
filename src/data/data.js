@@ -40,10 +40,3 @@ const serverData = (() => {
   return { getMovies, getSession, getSeats, reserveSeat };
 })();
 export default serverData;
-// let a = serverData.reserveSeat();
-
-// a.then((data) => {
-
-// }).catch((error) => {
-
-// });
