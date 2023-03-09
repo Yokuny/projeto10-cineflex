@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import data from "../../data/data.js";
+import post from "../../data/post.js";
 // import { useNavigate } from "react-router-dom";
 import { PageContainer, SeatsContainer, SeatItem, FormContainer } from "./SeatsStyle.js";
 import SeatsInfo from "./SeatsInfo.js";
@@ -59,7 +60,18 @@ function SeatsPage({ id }) {
       <FormContainer
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(e);
+          const name = e.target[0].value;
+          const cpf = e.target[1].value;
+          const ticket = post(name, cpf);
+          seats.forEach((seat) => {
+            if (seat.selected === true) {
+              ticket.ids.push(seat.id);
+            }
+          });
+          data
+            .reserveSeat(ticket)
+            .then((data) => {})
+            .catch((err) => {});
         }}>
         Nome do Comprador:
         <input
@@ -83,8 +95,8 @@ function SeatsPage({ id }) {
           type="text"
           required
           onChange={(e) => {
-            const cpf = parseInt(e.target.value.replace(/[^\d]+/g, ""));
-            if (cpf <= 1111111111 || cpf > 99999999999) {
+            const cpf = e.target.value.replace(/[^\d]+/g, "");
+            if (cpf.length < 11 || parseInt(cpf) > 99999999999) {
               e.target.style.color = "crimson";
               e.target.style.border = `2px solid crimson`;
             } else {
