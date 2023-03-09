@@ -32,7 +32,7 @@ const serverData = (() => {
   const reserveSeat = async (obj) => {
     try {
       const res = await axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj);
-      return res.status;
+      return res;
     } catch {
       errorLog("reserveSeat");
     }
