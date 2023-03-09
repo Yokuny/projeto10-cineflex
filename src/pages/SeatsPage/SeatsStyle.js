@@ -45,7 +45,7 @@ export const SeatItem = styled.button`
     cursor: not-allowed;
   }
 `;
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   width: calc(100vw - 40px);
   display: flex;
   flex-direction: column;

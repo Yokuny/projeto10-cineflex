@@ -56,11 +56,43 @@ function SeatsPage({ id }) {
         })}
       </SeatsContainer>
       <SeatsInfo colors={mark} />
-      <FormContainer>
+      <FormContainer
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(e);
+        }}>
         Nome do Comprador:
-        <input placeholder="Digite seu nome..." />
+        <input
+          placeholder="Digite seu nome..."
+          type="text"
+          minLength="10"
+          required
+          onChange={(e) => {
+            if (e.target.value.length >= 10) {
+              e.target.style.color = mark[2].color;
+              e.target.style.border = `2px solid #1AAE9E`;
+            } else {
+              e.target.style.color = "crimson";
+              e.target.style.border = `2px solid crimson`;
+            }
+          }}
+        />
         CPF do Comprador:
-        <input placeholder="Digite seu CPF..." />
+        <input
+          placeholder="Digite seu CPF..."
+          type="text"
+          required
+          onChange={(e) => {
+            const cpf = parseInt(e.target.value.replace(/[^\d]+/g, ""));
+            if (cpf <= 1111111111 || cpf > 99999999999) {
+              e.target.style.color = "crimson";
+              e.target.style.border = `2px solid crimson`;
+            } else {
+              e.target.style.border = `2px solid #1AAE9E`;
+              e.target.style.color = "#1AAE9E";
+            }
+          }}
+        />
         <button id={id}>Reservar Assento(s)</button>
       </FormContainer>
       <FooterContainer
