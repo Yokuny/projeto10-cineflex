@@ -29,6 +29,7 @@ export const FormContainer = styled.div`
   font-size: 18px;
   button {
     align-self: center;
+    cursor: pointer;
   }
   input {
     width: calc(100vw - 60px);
@@ -42,8 +43,8 @@ export const CaptionContainer = styled.div`
   margin: 20px;
 `;
 export const CaptionCircle = styled.div`
-  border: 1px solid blue; // Essa cor deve mudar
-  background-color: lightblue; // Essa cor deve mudar
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ color }) => color};
   height: 25px;
   width: 25px;
   border-radius: 25px;
@@ -58,18 +59,29 @@ export const CaptionItem = styled.div`
   align-items: center;
   font-size: 12px;
 `;
-export const SeatItem = styled.div`
-  border: 1px solid blue; // Essa cor deve mudar
-  background-color: lightblue; // Essa cor deve mudar
+export const SeatItem = styled.button`
   height: 25px;
   width: 25px;
-  border-radius: 25px;
-  font-family: "Roboto";
-  font-size: 11px;
+  padding: 0;
+  margin: 5px 3px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px 3px;
+
+  outline: inherit;
+  border-radius: 25px;
+  border: 1px solid ${({ border }) => border};
+  background-color: ${({ color }) => color};
+
+  font-family: "Roboto";
+  font-size: 11px;
+  color: #000;
+  cursor: pointer;
+  :disabled {
+    background-color: #fbe192;
+    cursor: not-allowed;
+  }
 `;
 export const FooterContainer = styled.div`
   width: 100%;
