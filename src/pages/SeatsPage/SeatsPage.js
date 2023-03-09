@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import data from "../../data/data.js";
+// import { useNavigate } from "react-router-dom";
+import { PageContainer, SeatsContainer, SeatItem, FormContainer } from "./SeatsStyle.js";
 import SeatsInfo from "./SeatsInfo.js";
-import { PageContainer, SeatsContainer, SeatItem, FormContainer, FooterContainer } from "./SeatsStyle.js";
+import FooterContainer from "./FooterContainer.js";
 const mark = [
   { color: "#C3CFD9", border: "#7B8B99" },
   { color: "#FBE192", border: "#F7C52B" },
   { color: "#1AAE9E", border: "#0E7D71" },
 ];
-
 function SeatsPage({ id }) {
   const [hour, setHour] = useState("");
   const [movie, setMovie] = useState({});
@@ -63,17 +63,11 @@ function SeatsPage({ id }) {
         <input placeholder="Digite seu CPF..." />
         <button id={id}>Reservar Assento(s)</button>
       </FormContainer>
-      <FooterContainer>
-        <div>
-          <img src={movie.posterURL} alt="poster" />
-        </div>
-        <div>
-          <p>{movie.title}</p>
-          <p>
-            {day.weekday} - {hour}
-          </p>
-        </div>
-      </FooterContainer>
+      <FooterContainer
+        img={movie.posterURL}
+        movie={movie.title}
+        day={day.weekday}
+        hour={hour}></FooterContainer>
     </PageContainer>
   );
 }
