@@ -1,78 +1,73 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import data from "../../data/data.js";
-import {
-  PageContainer,
-  SeatsContainer,
-  SeatItem,
-  CaptionContainer,
-  CaptionItem,
-  CaptionCircle,
-  FormContainer,
-  FooterContainer,
-} from "./SeatsStyle.js";
+// import { useNavigate } from "react-router-dom";
+import { PageContainer, SeatsContainer, SeatItem, FormContainer } from "./SeatsStyle.js";
+import SeatsInfo from "./SeatsInfo.js";
+import FooterContainer from "./FooterContainer.js";
 const mark = [
   { color: "#C3CFD9", border: "#7B8B99" },
   { color: "#FBE192", border: "#F7C52B" },
   { color: "#1AAE9E", border: "#0E7D71" },
 ];
 function SeatsPage({ id }) {
+  const [hour, setHour] = useState("");
+  const [movie, setMovie] = useState({});
+  const [day, setDay] = useState({});
   const [seats, setSeats] = useState([]);
+
+  const makeSelection = (id) => {
+    const newSeats = seats.map((selection) => {
+      if (selection.id === id) {
+        return { ...selection, selected: !selection.selected };
+      }
+      return selection;
+    });
+    setSeats(newSeats);
+  };
+
   useEffect(() => {
     data.getSeats(id).then((data) => {
-      setSeats(data);
+      setHour(data.name);
+      setDay(data.day);
+      setMovie(data.movie);
+      setSeats(
+        data.seats.map(({ id, name, isAvailable }) => {
+          return { id, name, isAvailable, selected: false };
+        })
+      );
     });
   }, []);
-  if (seats.length === 0) return <div>Carregando...</div>;
+
   return (
     <PageContainer>
       Selecione o(s) assento(s)
       <SeatsContainer>
-        {seats.seats.map((seat) => {
-          console.log(seat);
+        {seats.map((seat) => {
           return (
             <SeatItem
               key={seat.id}
               disabled={!seat.isAvailable}
-              color={seat.isAvailable ? mark[0].color : mark[1].color}
-              border={seat.isAvailable ? mark[0].border : mark[1].border}>
+              color={seat.selected ? mark[2].color : mark[0].color}
+              border={seat.selected ? mark[2].border : mark[0].border}
+              onClick={() => makeSelection(seat.id)}>
               {seat.name}
             </SeatItem>
           );
         })}
       </SeatsContainer>
-      <CaptionContainer>
-        <CaptionItem>
-          <CaptionCircle color={mark[2].color} border={mark[2].border} />
-          Selecionado
-        </CaptionItem>
-        <CaptionItem>
-          <CaptionCircle color={mark[0].color} border={mark[0].border} />
-          Disponível
-        </CaptionItem>
-        <CaptionItem>
-          <CaptionCircle color={mark[1].color} border={mark[1].border} />
-          Indisponível
-        </CaptionItem>
-      </CaptionContainer>
+      <SeatsInfo colors={mark} />
       <FormContainer>
         Nome do Comprador:
         <input placeholder="Digite seu nome..." />
         CPF do Comprador:
         <input placeholder="Digite seu CPF..." />
-        <button id={seats.id}>Reservar Assento(s)</button>
+        <button id={id}>Reservar Assento(s)</button>
       </FormContainer>
-      <FooterContainer>
-        <div>
-          <img src={seats.movie.posterURL} alt="poster" />
-        </div>
-        <div>
-          <p>{seats.movie.title}</p>
-          <p>
-            {seats.day.weekday} - {seats.name}
-          </p>
-        </div>
-      </FooterContainer>
+      <FooterContainer
+        img={movie.posterURL}
+        movie={movie.title}
+        day={day.weekday}
+        hour={hour}></FooterContainer>
     </PageContainer>
   );
 }
