@@ -11,7 +11,11 @@ import {
   FormContainer,
   FooterContainer,
 } from "./SeatsStyle.js";
-
+const mark = [
+  { color: "#C3CFD9", border: "#7B8B99" },
+  { color: "#FBE192", border: "#F7C52B" },
+  { color: "#1AAE9E", border: "#0E7D71" },
+];
 function SeatsPage({ id }) {
   const [seats, setSeats] = useState([]);
   useEffect(() => {
@@ -19,29 +23,35 @@ function SeatsPage({ id }) {
       setSeats(data);
     });
   }, []);
-  console.log(seats);
   if (seats.length === 0) return <div>Carregando...</div>;
   return (
     <PageContainer>
       Selecione o(s) assento(s)
       <SeatsContainer>
-        {seats.seats.map((seat) => (
-          <SeatItem disable={!seat.isAvailable} key={seat.key}>
-            {seat.name}
-          </SeatItem>
-        ))}
+        {seats.seats.map((seat) => {
+          console.log(seat);
+          return (
+            <SeatItem
+              key={seat.id}
+              disabled={!seat.isAvailable}
+              color={seat.isAvailable ? mark[0].color : mark[1].color}
+              border={seat.isAvailable ? mark[0].border : mark[1].border}>
+              {seat.name}
+            </SeatItem>
+          );
+        })}
       </SeatsContainer>
       <CaptionContainer>
         <CaptionItem>
-          <CaptionCircle />
+          <CaptionCircle color={mark[2].color} border={mark[2].border} />
           Selecionado
         </CaptionItem>
         <CaptionItem>
-          <CaptionCircle />
+          <CaptionCircle color={mark[0].color} border={mark[0].border} />
           Disponível
         </CaptionItem>
         <CaptionItem>
-          <CaptionCircle />
+          <CaptionCircle color={mark[1].color} border={mark[1].border} />
           Indisponível
         </CaptionItem>
       </CaptionContainer>
