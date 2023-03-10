@@ -8,6 +8,7 @@ function SessionsPage({ id, setHour }) {
   const navigate = useNavigate();
   const selectSeat = (seat) => {
     navigate(`/assentos/${seat}`);
+    // remover outro set q recebe esse seat
   };
   useEffect(() => {
     data.getSession(id).then((data) => {
@@ -21,18 +22,19 @@ function SessionsPage({ id, setHour }) {
       <div>
         {title.days.map((about) => {
           return (
-            <SessionContainer key={about.id}>
+            <SessionContainer key={about.id} data-test="movie-day">
               {about.weekday} - {about.date}
               <ButtonsContainer>
                 {about.showtimes.map((hour) => {
                   return (
                     <button
                       id={hour.id}
-                      key={`${hour.name} - ${hour.id}`}
+                      key={`${hour.name}-${hour.id}`}
                       onClick={() => {
                         setHour(hour.id);
                         selectSeat(hour.id);
-                      }}>
+                      }}
+                      test="showtime">
                       {hour.name}
                     </button>
                   );
@@ -42,7 +44,7 @@ function SessionsPage({ id, setHour }) {
           );
         })}
       </div>
-      <FooterContainer>
+      <FooterContainer data-test="footer">
         <div>
           <img src={title.posterURL} alt="poster" />
         </div>

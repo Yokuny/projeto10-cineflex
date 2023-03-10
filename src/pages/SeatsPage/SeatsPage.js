@@ -49,7 +49,8 @@ function SeatsPage({ id, final }) {
               disabled={!seat.isAvailable}
               color={seat.selected ? mark[2].color : mark[0].color}
               border={seat.selected ? mark[2].border : mark[0].border}
-              onClick={() => makeSelection(seat.id)}>
+              onClick={() => makeSelection(seat.id)}
+              data-test="seat">
               {seat.name}
             </SeatItem>
           );
@@ -96,6 +97,7 @@ function SeatsPage({ id, final }) {
               e.target.style.border = `2px solid crimson`;
             }
           }}
+          data-test="client-name"
         />
         CPF do Comprador:
         <input
@@ -113,14 +115,18 @@ function SeatsPage({ id, final }) {
             }
             e.target.value = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
           }}
+          data-test="client-cpf"
         />
-        <button id={id}>Reservar Assento(s)</button>
+        <button id={id} data-test="book-seat-btn">
+          Reservar Assento(s)
+        </button>
       </FormContainer>
       <FooterContainer
         img={movie.posterURL}
         movie={movie.title}
         day={day.weekday}
-        hour={hour}></FooterContainer>
+        hour={hour}
+        data-test="footer"></FooterContainer>
     </PageContainer>
   );
 }

@@ -13,12 +13,13 @@ function HomePage({ requireMovies, catalog, setMovie }) {
       <ListContainer>
         {catalog.map((movieData) => (
           <MovieContainer
-            id={movieData.id}
             key={movieData.id}
+            id={movieData.id}
             onClick={() => {
               setMovie(movieData.id);
               selectMovie(movieData.id);
-            }}>
+            }}
+            data-test="movie">
             <img src={movieData.posterURL} alt="poster" />
           </MovieContainer>
         ))}
