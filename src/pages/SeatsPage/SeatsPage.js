@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import data from "../../data/data.js";
 import post from "../../data/post.js";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PageContainer, SeatsContainer, SeatItem, FormContainer } from "./SeatsStyle.js";
 import SeatsInfo from "./SeatsInfo.js";
 import FooterContainer from "./FooterContainer.js";
@@ -10,12 +10,12 @@ const mark = [
   { color: "#FBE192", border: "#F7C52B" },
   { color: "#1AAE9E", border: "#0E7D71" },
 ];
-function SeatsPage({ id }) {
+function SeatsPage({ id, final }) {
   const [hour, setHour] = useState("");
   const [movie, setMovie] = useState({});
   const [day, setDay] = useState({});
   const [seats, setSeats] = useState([]);
-
+  const navigate = useNavigate();
   const makeSelection = (id) => {
     const newSeats = seats.map((selection) => {
       if (selection.id === id) {
@@ -25,7 +25,6 @@ function SeatsPage({ id }) {
     });
     setSeats(newSeats);
   };
-
   useEffect(() => {
     data.getSeats(id).then((data) => {
       setHour(data.name);
@@ -63,15 +62,24 @@ function SeatsPage({ id }) {
           const name = e.target[0].value;
           const cpf = e.target[1].value;
           const ticket = post(name, cpf);
+          const chair = [];
           seats.forEach((seat) => {
             if (seat.selected === true) {
               ticket.ids.push(seat.id);
+              chair.push(seat.name);
             }
           });
-          data
-            .reserveSeat(ticket)
-            .then((data) => {})
-            .catch((err) => {});
+          data.reserveSeat(ticket).then(() => {
+            final({
+              name: name,
+              cpf: cpf,
+              seats: chair,
+              movie: movie.title,
+              date: day.date,
+              hour: hour,
+            });
+            navigate(`/sucesso`);
+          });
         }}>
         Nome do Comprador:
         <input
@@ -103,6 +111,7 @@ function SeatsPage({ id }) {
               e.target.style.border = `2px solid #1AAE9E`;
               e.target.style.color = "#1AAE9E";
             }
+            e.target.value = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
           }}
         />
         <button id={id}>Reservar Assento(s)</button>

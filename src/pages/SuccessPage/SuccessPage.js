@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { PageContainer, TextContainer } from "./SuccessStyle";
-function SuccessPage() {
+function SuccessPage({ user }) {
+  const navigate = useNavigate();
+  const { movie, date, hour, name, cpf, seats } = user;
   return (
     <PageContainer>
       <h1>
@@ -10,28 +13,35 @@ function SuccessPage() {
         <strong>
           <p>Filme e sessão</p>
         </strong>
-        <p>Tudo em todo lugar ao mesmo tempo</p>
-        <p>03/03/2023 - 14:00</p>
+        <p>{movie}</p>
+        <p>
+          {date} - {hour}
+        </p>
       </TextContainer>
 
       <TextContainer>
         <strong>
           <p>Ingressos</p>
         </strong>
-        <p>Assento 01</p>
-        <p>Assento 02</p>
-        <p>Assento 03</p>
+        {seats.map((seat) => {
+          return <p key={`chair${seat}`}>Assento {seat}</p>;
+        })}
       </TextContainer>
 
       <TextContainer>
         <strong>
           <p>Comprador</p>
         </strong>
-        <p>Nome: Letícia Chijo</p>
-        <p>CPF: 123.456.789-10</p>
+        <p>Nome: {name}</p>
+        <p>CPF: {cpf}</p>
       </TextContainer>
 
-      <button>Voltar para Home</button>
+      <button
+        onClick={() => {
+          navigate(`/`);
+        }}>
+        Voltar para Home
+      </button>
     </PageContainer>
   );
 }

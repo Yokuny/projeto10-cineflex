@@ -1,13 +1,14 @@
 import axios from "axios";
 
 const serverData = (() => {
+  const url = "https://mock-api.driven.com.br/api/v8/cineflex";
   function errorLog(func) {
     console.log(`Erro no ${func}`);
     return false;
   }
   const getMovies = async () => {
     try {
-      const res = await axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
+      const res = await axios.get(`${url}/movies`);
       return res.data;
     } catch {
       errorLog("getMovies");
@@ -15,7 +16,7 @@ const serverData = (() => {
   };
   const getSession = async (id) => {
     try {
-      const res = await axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${id}/showtimes`);
+      const res = await axios.get(`${url}/movies/${id}/showtimes`);
       return res.data;
     } catch {
       errorLog("getSession");
@@ -23,7 +24,7 @@ const serverData = (() => {
   };
   const getSeats = async (id) => {
     try {
-      const res = await axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${id}/seats`);
+      const res = await axios.get(`${url}/showtimes/${id}/seats`);
       return res.data;
     } catch {
       errorLog("getSeats");
@@ -31,7 +32,7 @@ const serverData = (() => {
   };
   const reserveSeat = async (obj) => {
     try {
-      const res = await axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", obj);
+      const res = await axios.post(`${url}/seats/book-many`, obj);
       return res;
     } catch {
       errorLog("reserveSeat");
