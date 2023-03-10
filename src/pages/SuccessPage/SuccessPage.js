@@ -9,7 +9,7 @@ function SuccessPage({ user }) {
         Pedido feito <br /> com sucesso!
       </h1>
 
-      <TextContainer>
+      <TextContainer data-test="movie-info">
         <strong>
           <p>Filme e sessão</p>
         </strong>
@@ -19,7 +19,7 @@ function SuccessPage({ user }) {
         </p>
       </TextContainer>
 
-      <TextContainer>
+      <TextContainer data-test="seats-info">
         <strong>
           <p>Ingressos</p>
         </strong>
@@ -28,7 +28,7 @@ function SuccessPage({ user }) {
         })}
       </TextContainer>
 
-      <TextContainer>
+      <TextContainer data-test="client-info">
         <strong>
           <p>Comprador</p>
         </strong>
@@ -39,7 +39,8 @@ function SuccessPage({ user }) {
       <button
         onClick={() => {
           navigate(`/`);
-        }}>
+        }}
+        data-test="go-home-btn">
         Voltar para Home
       </button>
     </PageContainer>
