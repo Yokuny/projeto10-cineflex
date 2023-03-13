@@ -1,5 +1,17 @@
-import styled from "styled-components";
-const NavContainer = styled.div`
+import styled, { keyframes } from "styled-components";
+import BackArrow from "../assets/arrow.svg";
+const move = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`;
+const NavStyle = styled.div`
   width: 100%;
   height: 70px;
   display: flex;
@@ -15,5 +27,24 @@ const NavContainer = styled.div`
     text-decoration: none;
     color: #e8833a;
   }
+  img {
+    position: absolute;
+    left: 18px;
+    cursor: pointer;
+    &:hover {
+      -webkit-animation: ${move} 1s infinite;
+      -moz-animation: ${move} 1s infinite;
+      -o-animation: ${move} 1s infinite;
+      animation: ${move} 1s infinite;
+    }
+  }
 `;
+const NavContainer = ({ children }) => {
+  return (
+    <NavStyle>
+      <img src={BackArrow} alt="" />
+      {children}
+    </NavStyle>
+  );
+};
 export default NavContainer;
