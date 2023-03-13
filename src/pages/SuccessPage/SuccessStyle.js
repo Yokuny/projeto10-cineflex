@@ -14,6 +14,7 @@ export const PageContainer = styled.div`
   }
   button {
     margin-top: 50px;
+    cursor: pointer;
   }
   h1 {
     font-family: "Roboto";
