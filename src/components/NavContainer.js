@@ -32,12 +32,12 @@ const NavStyle = styled.div`
     position: absolute;
     left: 18px;
     cursor: pointer;
-    &:hover {
+    /* &:hover {
       -webkit-animation: ${move} 1s infinite;
       -moz-animation: ${move} 1s infinite;
       -o-animation: ${move} 1s infinite;
       animation: ${move} 1s infinite;
-    }
+    } */
   }
 `;
 const NavContainer = ({ children, btnCondition }) => {
