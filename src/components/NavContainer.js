@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import styled, { keyframes } from "styled-components";
 import BackArrow from "../assets/arrow.svg";
 const move = keyframes`
@@ -40,9 +41,11 @@ const NavStyle = styled.div`
   }
 `;
 const NavContainer = ({ children }) => {
+  const navigate = useNavigate();
+  console.log(navigate);
   return (
     <NavStyle>
-      <img src={BackArrow} alt="" />
+      <img src={BackArrow} alt="" onClick={() => navigate(-1)} />
       {children}
     </NavStyle>
   );
