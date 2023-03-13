@@ -44,7 +44,9 @@ const NavContainer = ({ children, btnCondition }) => {
   const navigate = useNavigate();
   return (
     <NavStyle>
-      {btnCondition && <img src={BackArrow} alt="" onClick={() => navigate(-1)} />}
+      {btnCondition && (
+        <img src={BackArrow} alt="" onClick={() => navigate(-1)} data-test="go-home-header-btn" />
+      )}
       {children}
     </NavStyle>
   );
