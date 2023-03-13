@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import data from "../../data/data.js";
 import post from "../../data/post.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer, SeatsContainer, SeatItem, FormContainer } from "./SeatsStyle.js";
 import SeatsInfo from "./SeatsInfo.js";
 import FooterContainer from "./FooterContainer.js";
@@ -10,11 +10,12 @@ const mark = [
   { color: "#FBE192", border: "#F7C52B" },
   { color: "#1AAE9E", border: "#0E7D71" },
 ];
-function SeatsPage({ id, final }) {
+function SeatsPage({ final }) {
   const [hour, setHour] = useState("");
   const [movie, setMovie] = useState({});
   const [day, setDay] = useState({});
   const [seats, setSeats] = useState([]);
+  const params = useParams();
   const navigate = useNavigate();
   const makeSelection = (id) => {
     const newSeats = seats.map((selection) => {
@@ -26,7 +27,7 @@ function SeatsPage({ id, final }) {
     setSeats(newSeats);
   };
   useEffect(() => {
-    data.getSeats(id).then((data) => {
+    data.getSeats(params.hour).then((data) => {
       setHour(data.name);
       setDay(data.day);
       setMovie(data.movie);
@@ -117,7 +118,7 @@ function SeatsPage({ id, final }) {
           }}
           data-test="client-cpf"
         />
-        <button id={id} data-test="book-seat-btn">
+        <button id={params.hour} data-test="book-seat-btn">
           Reservar Assento(s)
         </button>
       </FormContainer>

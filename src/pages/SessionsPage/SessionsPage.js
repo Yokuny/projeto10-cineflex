@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import { PageContainer, SessionContainer, ButtonsContainer, FooterContainer } from "./SessionsStyle";
 import data from "../../data/data.js";
 
-function SessionsPage({ id, setHour }) {
+function SessionsPage() {
   const [title, setTitle] = useState([]);
+  const { movie } = useParams();
   const navigate = useNavigate();
-  const selectSeat = (seat) => {
-    navigate(`/assentos/${seat}`);
-    // remover outro set q recebe esse seat
-  };
   useEffect(() => {
-    data.getSession(id).then((data) => {
+    data.getSession(movie).then((data) => {
       setTitle(data);
     });
   }, []);
@@ -31,8 +29,7 @@ function SessionsPage({ id, setHour }) {
                       id={hour.id}
                       key={`${hour.name}-${hour.id}`}
                       onClick={() => {
-                        setHour(hour.id);
-                        selectSeat(hour.id);
+                        navigate(`/assentos/${hour.id}`);
                       }}
                       test="showtime">
                       {hour.name}

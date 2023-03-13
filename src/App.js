@@ -11,8 +11,6 @@ import data from "./data/data.js";
 
 function App() {
   const [moviesData, setMoviesData] = useState([]);
-  const [movie, setMovie] = useState(null);
-  const [hour, setHour] = useState(null);
   const [final, setFinal] = useState([]);
   const getMoviesData = () => {
     data.getMovies().then((moviesData) => {
@@ -24,12 +22,9 @@ function App() {
       <BrowserRouter>
         <NavContainer>CINEFLEX</NavContainer>
         <Routes>
-          <Route
-            path="/"
-            element={<HomePage requireMovies={getMoviesData} catalog={moviesData} setMovie={setMovie} />}
-          />
-          <Route path="/sessoes/:movie" element={<SessionsPage id={movie} setHour={setHour} />} />
-          <Route path="/assentos/:hour" element={<SeatsPage id={hour} final={setFinal} />} />
+          <Route path="/" element={<HomePage requireMovies={getMoviesData} catalog={moviesData} />} />
+          <Route path="/sessoes/:movie" element={<SessionsPage />} />
+          <Route path="/assentos/:hour" element={<SeatsPage final={setFinal} />} />
           <Route path="/sucesso" element={<SuccessPage user={final} />} />
         </Routes>
       </BrowserRouter>
