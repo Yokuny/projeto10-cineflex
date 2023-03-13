@@ -40,12 +40,11 @@ const NavStyle = styled.div`
     }
   }
 `;
-const NavContainer = ({ children }) => {
+const NavContainer = ({ children, btnCondition }) => {
   const navigate = useNavigate();
-  console.log(navigate);
   return (
     <NavStyle>
-      <img src={BackArrow} alt="" onClick={() => navigate(-1)} />
+      {btnCondition && <img src={BackArrow} alt="" onClick={() => navigate(-1)} />}
       {children}
     </NavStyle>
   );
