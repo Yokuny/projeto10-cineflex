@@ -127,8 +127,7 @@ function SeatsPage({ final, backBtn }) {
         img={movie.posterURL}
         movie={movie.title}
         day={day.weekday}
-        hour={hour}
-        data-test="footer"></FooterContainer>
+        hour={hour}></FooterContainer>
     </PageContainer>
   );
 }

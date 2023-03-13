@@ -36,7 +36,7 @@ const FooterContainerStyle = styled.div`
   }
 `;
 const FooterContainer = ({ img, movie, day, hour }) => (
-  <FooterContainerStyle>
+  <FooterContainerStyle data-test="footer">
     <div>
       <img src={img} alt="poster" />
     </div>
