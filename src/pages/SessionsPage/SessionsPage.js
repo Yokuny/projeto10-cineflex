@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer, SessionContainer, ButtonsContainer, FooterContainer } from "./SessionsStyle";
 import data from "../../data/data.js";
 
-function SessionsPage() {
+function SessionsPage({ backBtn }) {
   const [title, setTitle] = useState([]);
   const { movie } = useParams();
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ function SessionsPage() {
                       key={`${hour.name}-${hour.id}`}
                       onClick={() => {
                         navigate(`/assentos/${hour.id}`);
+                        backBtn(true);
                       }}
                       test="showtime">
                       {hour.name}

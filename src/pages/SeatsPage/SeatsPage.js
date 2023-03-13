@@ -10,7 +10,7 @@ const mark = [
   { color: "#FBE192", border: "#F7C52B" },
   { color: "#1AAE9E", border: "#0E7D71" },
 ];
-function SeatsPage({ final }) {
+function SeatsPage({ final, backBtn }) {
   const [hour, setHour] = useState("");
   const [movie, setMovie] = useState({});
   const [day, setDay] = useState({});
@@ -80,6 +80,7 @@ function SeatsPage({ final }) {
               date: day.date,
               hour: hour,
             });
+            backBtn(false);
             navigate(`/sucesso`);
           });
         }}>
